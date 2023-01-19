@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSMpeg Stream Client</title>
+	<style type="text/css">
+		html, body {
+			background-color: #111;
+			text-align: center;
+		}
+	</style>
+	
+</head>
+<body>
+	<canvas id="video-canvas"></canvas>
+	<script type="text/javascript" src="jsmpeg.min.js"></script>
+	<script type="text/javascript">
+		socket = new WebSocket('wss://3b0c-2405-201-e022-4971-f5a2-7bdc-ccdf-7e3f.in.ngrok.io:8082/');
+		socket.onopen = function(){
+		    console.log('Socket is now open.');
+		};
+		socket.onerror = function (error) {
+		    console.error('There was an un-identified Web Socket error');
+		};
+		socket.onmessage = function (message) {
+		    console.info("Message: %o", message.data);
+		};
+		var canvas = document.getElementById('video-canvas');
+		var url = 'wss://king-prawn-app-6t6oa.ondigitalocean.app/a';
+		var player = new JSMpeg.Player(url, {canvas: canvas});
+	</script>
+</body>
+</html>
